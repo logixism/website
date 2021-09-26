@@ -4,6 +4,7 @@ body{
   background: #00152f;
 }
 .box{
+  border-radius: 50%;
   width: 450px;
   background: rgba(0, 0, 0, 0.4);
   padding: 40px;
@@ -19,19 +20,16 @@ body{
   height: 200px;
 }
 .box h1{
-  border-radius: 50%;
   font-size: 40px;
   letter-spacing: 4px;
   font-weight: 100;
 }
 .box h5{
-  border-radius: 50%;
   font-size: 20px;
   letter-spacing: 3px;
   font-weight: 100;
 }
 .box p{
-  border-radius: 50%;
   text-align: justify;
 }
 ul{
@@ -39,19 +37,16 @@ ul{
   padding: 0;
 }
 .box li{
-  border-radius: 50%;
   display: inline-block;
   margin: 6px;
   list-style: none;
 }
 .box li a{
-  border-radius: 50%;
   color: white;
   text-decoration: none;
   font-size: 60px;
   transition: all ease-in-out 250ms;
 }
 .box li a:hover{
-  border-radius: 50%;
   color: #b9b9b9;
 }
