@@ -1,6 +1,6 @@
-body{
-  margin: 0;
-  padding: 0;
+#particles-js{
+  background:#005b96;
+  height: 1000px;
 }
 
 .box{
@@ -49,8 +49,4 @@ ul{
 }
 .box li a:hover{
   color: #b9b9b9;
-}
-#particles-js{
-  background:#005b96;
-  height: 1000px;
 }
