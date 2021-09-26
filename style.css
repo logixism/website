@@ -2,7 +2,6 @@ body{
   margin: 0;
   padding: 0;
   background: linear-gradient(#141e30, #243b55);
-  background-size: cover;
 }
 .box{
   width: 450px;
