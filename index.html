@@ -14,15 +14,19 @@
   </head>
   <body>
     <div class="box">
-      <a style="cursor: normal;" target="_blank" href = "https://www.youtube.com/watch?v=eY52Zsg-KVI">
+      <a style="cursor: normal;" target="_blank" onclick = "openseal();">
         <img src="icon.png" alt="" class="box-img" />
       </a>
       <h1>Logix</h1>
       <h5>Lua & Python <a href = "https://v3rmillion.net/member.php?action=profile&uid=886142"> Developer </a></h5>
       <ul>
-        <li><a style="cursor: normal;" target="_blank" href="https://discord.com/users/804066391614423061"><i class="fab fa-discord"></i></a></li>
-        <li><a style="cursor: normal;" target="_blank" href="https://github.com/logixhot/"><i class="fab fa-github"></i></i></a></li>
+        <li>target="_blank" href="https://discord.com/users/804066391614423061"><i class="fab fa-discord"></i></a></li>
+        <li>target="_blank" href="https://github.com/logixhot/"><i class="fab fa-github"></i></i></a></li>
       </ul>
     </div>
   </body>
 </html>
+
+function open_seal() {
+    return window.open("https://www.youtube.com/watch?v=eY52Zsg-KVI", "_blank").focus();
+};
