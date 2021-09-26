@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
+  <script src="https://unpkg.com/trianglify@^4/dist/trianglify.bundle.js"></script>
+  <script>
+    const pattern = trianglify({
+      width: window.innerWidth,
+      height: window.innerHeight
+    })
+    document.body.appendChild(pattern.toCanvas())
+  </script>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>logixism</title>
   </head>
   <body>
-<div class="box">
-  <img src="icon.png" alt="" class="box-img">
-  <h1>
-Logix</h1>
-<h5>Lua & Python Developer</h5>
-<p>hi</p>
-<ul>
-<li><a href="#"><i class="fab fa-discord-square" aria-hidden="true"></i></a></li>
-</ul>
-</div>
-</body>
+    <div class="box">
+      <img src="icon.png" alt="" class="box-img" />
+      <h1>Logix</h1>
+      <h5>Lua & Python Developer</h5>
+      <p>hi</p>
+      <ul>
+        <li>
+          <a href="#"
+            ><i class="fab fa-discord-square" aria-hidden="true"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </body>
 </html>
-
