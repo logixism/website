@@ -4,7 +4,7 @@ body{
   background: linear-gradient(to left top, #141e30, #243b55) fixed;
 }
 .box{
-  border-radius: 7%
+  border-radius: 7%;
   width: 450px;
   height: 600px;
   background: rgba(0, 0, 0, 0.4);
