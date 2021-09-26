@@ -39,7 +39,7 @@ ul{
 }
 .box li{
   display: inline-block;
-  margin: 6px;
+  margin: 15px;
   list-style: none;
 }
 .box li a{
