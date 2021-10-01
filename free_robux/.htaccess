@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteCond %{THE_REQUEST} /([^.]+)\.pdf [NC]
 RewriteRule ^ /%1 [NC,L,R]
 
 RewriteCond %{REQUEST_FILENAME}.pdf -f
