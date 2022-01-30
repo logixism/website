@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Delete</title>
+  </head>
+  <body onload="logged_in()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/pastebin.html">Logix's pastebin</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/register.html">Register<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/login.html">Log in<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/view_paste.html">View paste<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/make_paste.html">Create paste<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/delete_paste.html">Delete paste<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <p id="loggedAs"><i>Logged in as: placeholder</i></p>
+        </div>
+    </nav>
+    <form style="padding: 15px;">
+        <div class="form-group">
+          <label for="inputPaste" id="labelPaste">Paste</label>
+          <input type="paste" class="form-control" id="inputPaste" aria-describedby="usernameHelp" placeholder="Enter paste id">
+        </div>
+        <button id="btn-delete-paste" type="button" class="btn btn-primary" onclick="delete_paste()">Delete paste</button>
+    </form>
+
+    <script>
+
+    function logged_in() {
+        if (localStorage.getItem("authorization")) {
+            let request = new XMLHttpRequest();
+            request.open("GET", `https://logixism.tech/api/auth/name/${localStorage.getItem("authorization")}`);
+            request.setRequestHeader("authorization", localStorage.getItem("authorization"));
+            request.send();
+            request.onload = () => {
+                document.getElementById("loggedAs").innerHTML = `Logged in as: ${JSON.parse(request.response)}`
+            }
+        }
+    }
+    function delete_paste() {
+        let paste_id = document.getElementById("inputPaste").value.toString();
+
+        let request = new XMLHttpRequest();
+        request.open("DELETE", `https://logixism.tech/api/paste/${paste_id}`);
+        request.setRequestHeader("authorization", localStorage.getItem("authorization"));
+        request.send();
+        request.onload = () => {
+            let status = JSON.parse(request.response).status
+            if (status === 200) {
+                document.getElementById("btn-delete-paste").innerHTML = "Paste deleted"
+                setTimeout(() => { location.reload(); }, 5000);
+            }
+            else if (status === 401) {
+                document.getElementById("btn-delete-paste").innerHTML = "Unathorized (please log in)"
+                setTimeout(() => { location.reload(); }, 5000);
+            }
+            else if (status === 404) {
+                document.getElementById("btn-delete-paste").innerHTML = "Paste not found"
+                setTimeout(() => { location.reload(); }, 5000);
+            }
+        }
+    }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>View</title>
+  </head>
+  <body onload="logged_in()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/pastebin.html">Logix's pastebin</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/register.html">Register<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/login.html">Log in<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/view_paste.html">View paste<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/make_paste.html">Create paste<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/delete_paste.html">Delete paste<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <p id="loggedAs"><i>Logged in as: placeholder</i></p>
+        </div>
+    </nav>
+    <form style="padding: 15px;">
+        <div class="form-group">
+          <label for="inputUsername" id="labelPaste">Paste</label>
+          <input type="name" class="form-control" id="inputPaste" aria-describedby="usernameHelp" placeholder="Enter paste id">
+        </div>
+
+        <button id = "btn-sign-in" type="button" class="btn btn-primary" onclick="view()">View paste</button>
+      </form>
+
+    <script>
+    function logged_in() {
+        if (localStorage.getItem("authorization")) {
+            let request = new XMLHttpRequest();
+            request.open("GET", `https://logixism.tech/api/auth/name/${localStorage.getItem("authorization")}`);
+            request.setRequestHeader("authorization", localStorage.getItem("authorization"));
+            request.send();
+            request.onload = () => {
+                document.getElementById("loggedAs").innerHTML = `Logged in as: ${JSON.parse(request.response)}`
+            }
+        }
+    }
+
+    function revealPassword() {
+        let checkBox = document.getElementById("viewPassword");
+        let pw = document.getElementById("inputPassword");
+        if (checkBox.checked == true){
+            pw.type = "none";
+        } 
+        else {
+            pw.type = "password";
+        }
+    }
+
+    function view() {
+        window.location.replace(`http://logixism.tech/api/paste/${document.getElementById("inputPaste").value}`);
+    }
+    </script>
+  </body>
+</html>

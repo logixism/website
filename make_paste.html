@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>View</title>
+  </head>
+  <body onload="logged_in()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/pastebin.html">Logix's pastebin</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/register.html">Register<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/login.html">Log in<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/view_paste.html">View paste<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/make_paste.html">Create paste<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/delete_paste.html">Delete paste<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <p id="loggedAs"><i>Logged in as: placeholder</i></p>
+        </div>
+    </nav>
+    <form style="padding: 15px;">
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea class="form-control" id="text" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="inputUsername" id="labelPaste">Paste name</label>
+            <input type="name" class="form-control" id="inputName" aria-describedby="usernameHelp" placeholder="Enter paste name">
+        </div>
+
+        <button id = "btn-create-paste" type="button" class="btn btn-primary" onclick="create_paste()">Create paste</button>
+      </form>
+
+    <script>
+    function logged_in() {
+        if (localStorage.getItem("authorization")) {
+            let request = new XMLHttpRequest();
+            request.open("GET", `https://logixism.tech/api/auth/name/${localStorage.getItem("authorization")}`);
+            request.setRequestHeader("authorization", localStorage.getItem("authorization"));
+            request.send();
+            request.onload = () => {
+                document.getElementById("loggedAs").innerHTML = `Logged in as: ${JSON.parse(request.response)}`
+            }
+        }
+    }
+
+    function create_paste() {
+        let request = new XMLHttpRequest();
+        request.open("POST", "https://logixism.tech/api/auth/login");
+        request.setRequestHeader("authorization", localStorage.getItem("authorization"));
+        request.setRequestHeader("text", document.getElementById("text").value);
+        request.setRequestHeader("name", document.getElementById("inputName").value);
+        request.send();
+        request.onload = () => {
+            let status = JSON.parse(request.response).status
+            if (status === 200) {
+                document.getElementById("btn-create-paste").innerHTML = "Paste created"
+                window.location.replace(`http://logixism.tech/api/paste/${JSON.parse(request.response).paste_id}`);
+            }
+            else if (status === 401) {
+                document.getElementById("btn-create-paste").innerHTML = "Unathorized (please log in)"
+                setTimeout(() => { location.reload(); }, 5000);
+            }
+            else if (status === 403) {
+                document.getElementById("btn-create-paste").innerHTML = "Text/name too big"
+                setTimeout(() => { location.reload(); }, 5000);
+            }
+        }
+    }
+    </script>
+  </body>
+</html>
