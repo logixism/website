@@ -80,7 +80,7 @@
         let request = new XMLHttpRequest();
         request.open("POST", "https://logixism.tech/api/auth/login");
         request.setRequestHeader("Content-Type", "application/json");
-        request.send(JSON.stringify({"name": username, "password": password}));
+        request.send(JSON.stringify({"username": username, "password": password}));
         request.onload = () => {
           localStorage.setItem("authorization", JSON.parse(request.response)[1].token.toString())
         }

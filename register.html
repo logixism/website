@@ -80,7 +80,7 @@
     function register() {
         let username = document.getElementById("inputUsername").value.toString();
         let password = document.getElementById("inputPassword").value.toString();
-        let register_key = document.getElementById("inputRKey")
+        let register_key = document.getElementById("inputRKey").value.toString();
 
         let request = new XMLHttpRequest();
         request.open("POST", "https://logixism.tech/api/auth/register");

@@ -1,6 +1,0 @@
-RewriteEngine on
-RewriteCond %{THE_REQUEST} /([^.]+)\.mp4 [NC]
-RewriteRule ^ /%1 [NC,L,R]
-
-RewriteCond %{REQUEST_FILENAME}.mp4 -f
-RewriteRule ^ %{REQUEST_URI}.mp4 [NC,L]
